@@ -80,7 +80,7 @@
   - 🌍 TTS 翻译支持（例如，用中文聊天的同时，AI 使用日语声音）
 
 - 🧠 **广泛的模型支持**：
-  - 🤖 大语言模型 (LLM)：Ollama、OpenAI（以及任何与 OpenAI 兼容的 API）、Gemini、Claude、Mistral、DeepSeek、智谱、GGUF、LM Studio、vLLM 等
+  - 🤖 大语言模型 (LLM)：Ollama、OpenAI（以及任何与 OpenAI 兼容的 API）、Azure OpenAI、Gemini、Claude、Mistral、DeepSeek、智谱、GGUF、LM Studio、vLLM 等
   - 🎙️ 语音识别 (ASR)：sherpa-onnx、FunASR、Faster-Whisper、Whisper.cpp、Whisper、Groq Whisper、Azure ASR等
   - 🔊 语音合成 (TTS)：sherpa-onnx、pyttsx3、MeloTTS、Coqui-TTS、GPTSoVITS、Bark、CosyVoice、Edge TTS、Fish Audio、Azure TTS等
 

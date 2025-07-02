@@ -1,6 +1,6 @@
 # System Settings: Setting related to the initialization of the server
 system_config:
-  conf_version: 'v1.1.1'
+  conf_version: 'v1.1.0-alpha.1'
   host: 'localhost' # use 0.0.0.0 if you want other devices to access this page
   port: 12393
   # New setting for alternative configurations
@@ -47,7 +47,7 @@ character_config:
         # examples: 
         # 'openai_compatible_llm', 'llama_cpp_llm', 'claude_llm', 'ollama_llm'
         # 'openai_llm', 'gemini_llm', 'zhipu_llm', 'deepseek_llm', 'groq_llm'
-        # 'mistral_llm'
+        # 'mistral_llm', 'azure_openai_llm'
         llm_provider: 'ollama_llm'
         # let ai speak as soon as the first comma is received on the first sentence
         # to reduced latency.
@@ -128,6 +128,13 @@ character_config:
       openai_llm:
         llm_api_key: 'Your Open AI API key'
         model: 'gpt-4o'
+        temperature: 1.0 # value between 0 to 2
+
+      azure_openai_llm:
+        azure_endpoint: 'https://your-azure-endpoint/'
+        deployment_name: 'your-deployment'
+        api_version: '2024-12-01-preview'
+        llm_api_key: 'Your Azure API key'
         temperature: 1.0 # value between 0 to 2
 
       gemini_llm:
