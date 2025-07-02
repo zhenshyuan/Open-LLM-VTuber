@@ -35,6 +35,16 @@ class LLMFactory:
                 organization_id=kwargs.get("organization_id"),
                 project_id=kwargs.get("project_id"),
             )
+        if llm_provider == "azure_openai_llm":
+            from .stateless_llm.azure_openai_llm import AsyncLLM as AzureAsyncLLM
+
+            return AzureAsyncLLM(
+                deployment_name=kwargs.get("deployment_name"),
+                azure_endpoint=kwargs.get("azure_endpoint"),
+                api_version=kwargs.get("api_version"),
+                llm_api_key=kwargs.get("llm_api_key"),
+                temperature=kwargs.get("temperature"),
+            )
         if llm_provider == "ollama_llm":
             return OllamaLLM(
                 model=kwargs.get("model"),

@@ -140,6 +140,35 @@ class GroqConfig(OpenAICompatibleConfig):
     )
 
 
+class AzureOpenAIConfig(StatelessLLMBaseConfig):
+    """Configuration for Azure OpenAI API."""
+
+    azure_endpoint: str = Field(..., alias="azure_endpoint")
+    llm_api_key: str = Field(..., alias="llm_api_key")
+    api_version: str = Field(..., alias="api_version")
+    deployment_name: str = Field(..., alias="deployment_name")
+    temperature: float = Field(1.0, alias="temperature")
+
+    _AZURE_DESCRIPTIONS: ClassVar[dict[str, Description]] = {
+        "azure_endpoint": Description(
+            en="Azure endpoint for the OpenAI resource",
+            zh="Azure OpenAI 端点",
+        ),
+        "llm_api_key": Description(en="API key for authentication", zh="API 认证密钥"),
+        "api_version": Description(en="Azure OpenAI API version", zh="Azure OpenAI API 版本"),
+        "deployment_name": Description(en="Deployment name", zh="部署名称"),
+        "temperature": Description(
+            en="What sampling temperature to use, between 0 and 2.",
+            zh="使用的采样温度，介于 0 和 2 之间。",
+        ),
+    }
+
+    DESCRIPTIONS: ClassVar[dict[str, Description]] = {
+        **StatelessLLMBaseConfig.DESCRIPTIONS,
+        **_AZURE_DESCRIPTIONS,
+    }
+
+
 class ClaudeConfig(StatelessLLMBaseConfig):
     """Configuration for OpenAI Official API."""
 
@@ -202,6 +231,7 @@ class StatelessLLMConfigs(I18nMixin, BaseModel):
     claude_llm: ClaudeConfig | None = Field(None, alias="claude_llm")
     llama_cpp_llm: LlamaCppConfig | None = Field(None, alias="llama_cpp_llm")
     mistral_llm: MistralConfig | None = Field(None, alias="mistral_llm")
+    azure_openai_llm: AzureOpenAIConfig | None = Field(None, alias="azure_openai_llm")
 
     DESCRIPTIONS: ClassVar[dict[str, Description]] = {
         "openai_compatible_llm": Description(
@@ -228,5 +258,8 @@ class StatelessLLMConfigs(I18nMixin, BaseModel):
         ),
         "llama_cpp_llm": Description(
             en="Configuration for local Llama.cpp", zh="本地Llama.cpp配置"
+        ),
+        "azure_openai_llm": Description(
+            en="Configuration for Azure OpenAI API", zh="Azure OpenAI API 配置"
         ),
     }
