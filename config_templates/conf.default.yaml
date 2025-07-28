@@ -164,7 +164,7 @@ character_config:
 
   # === Automatic Speech Recognition ===
   asr_config:
-    # speech to text model options: 'faster_whisper', 'whisper_cpp', 'whisper', 'azure_asr', 'fun_asr', 'groq_whisper_asr', 'sherpa_onnx_asr'
+    # speech to text model options: 'faster_whisper', 'whisper_cpp', 'whisper', 'azure_asr', 'fun_asr', 'groq_whisper_asr', 'sherpa_onnx_asr', 'meralion_asr'
     asr_model: 'sherpa_onnx_asr'
 
     azure_asr:
@@ -249,7 +249,11 @@ character_config:
       # feature_dim: 80       # Feature dimension (should match the model's expected feature dimension)
       use_itn: True # Enable ITN for SenseVoice models (should set to False if not using SenseVoice models)
       # Provider for inference (cpu or cuda) (cuda option needs additional settings. Please check our docs)
-      provider: 'cpu' 
+      provider: 'cpu'
+
+    meralion_asr:
+      model_path: './models/meralion'
+      device: 'auto'
 
     groq_whisper_asr:
       api_key: ''

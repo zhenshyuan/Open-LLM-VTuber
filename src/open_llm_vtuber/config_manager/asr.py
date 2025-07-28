@@ -276,6 +276,23 @@ class SherpaOnnxASRConfig(I18nMixin):
         return values
 
 
+class MERaLiONASRConfig(I18nMixin):
+    """Configuration for MERaLiON ASR."""
+
+    model_path: str = Field(..., alias="model_path")
+    device: Literal["auto", "cpu", "cuda"] = Field("auto", alias="device")
+
+    DESCRIPTIONS: ClassVar[Dict[str, Description]] = {
+        "model_path": Description(
+            en="Path to the MERaLiON model", zh="MERaLiON 模型路径"
+        ),
+        "device": Description(
+            en="Device for inference (auto, cpu, or cuda)",
+            zh="用于推理的设备 (auto、cpu 或 cuda)",
+        ),
+    }
+
+
 class ASRConfig(I18nMixin):
     """Configuration for Automatic Speech Recognition."""
 
@@ -287,6 +304,7 @@ class ASRConfig(I18nMixin):
         "fun_asr",
         "groq_whisper_asr",
         "sherpa_onnx_asr",
+        "meralion_asr",
     ] = Field(..., alias="asr_model")
     azure_asr: Optional[AzureASRConfig] = Field(None, alias="azure_asr")
     faster_whisper: Optional[FasterWhisperConfig] = Field(None, alias="faster_whisper")
@@ -299,6 +317,7 @@ class ASRConfig(I18nMixin):
     sherpa_onnx_asr: Optional[SherpaOnnxASRConfig] = Field(
         None, alias="sherpa_onnx_asr"
     )
+    meralion_asr: Optional[MERaLiONASRConfig] = Field(None, alias="meralion_asr")
 
     DESCRIPTIONS: ClassVar[Dict[str, Description]] = {
         "asr_model": Description(
@@ -318,6 +337,9 @@ class ASRConfig(I18nMixin):
         ),
         "sherpa_onnx_asr": Description(
             en="Configuration for Sherpa Onnx ASR", zh="Sherpa Onnx ASR 配置"
+        ),
+        "meralion_asr": Description(
+            en="Configuration for MERaLiON ASR", zh="MERaLiON ASR 配置"
         ),
     }
 
@@ -340,5 +362,7 @@ class ASRConfig(I18nMixin):
             values.groq_whisper_asr.model_validate(values.groq_whisper_asr.model_dump())
         elif asr_model == "SherpaOnnxASR" and values.sherpa_onnx_asr is not None:
             values.sherpa_onnx_asr.model_validate(values.sherpa_onnx_asr.model_dump())
+        elif asr_model == "MERaLiONASR" and values.meralion_asr is not None:
+            values.meralion_asr.model_validate(values.meralion_asr.model_dump())
 
         return values

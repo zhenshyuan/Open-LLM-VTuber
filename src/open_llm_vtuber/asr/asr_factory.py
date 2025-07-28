@@ -56,5 +56,12 @@ class ASRFactory:
             from .sherpa_onnx_asr import VoiceRecognition as SherpaOnnxASR
 
             return SherpaOnnxASR(**kwargs)
+        elif system_name == "meralion_asr":
+            from .meralion_asr import VoiceRecognition as MERaLiONASR
+
+            return MERaLiONASR(
+                model_path=kwargs.get("model_path"),
+                device=kwargs.get("device"),
+            )
         else:
             raise ValueError(f"Unknown ASR system: {system_name}")
